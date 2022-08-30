@@ -10,7 +10,7 @@ import utils.ConversorClasseJSON;
 
 /**
  *
- * @author lucas
+ * @author Matheus Henrique Maas
  */
 public class ControllerPessoa {
     private String msg = "";

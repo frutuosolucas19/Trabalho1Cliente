@@ -7,7 +7,7 @@ import utils.ConexaoSocket;
 
 /**
  *
- * @author Matheus
+ * @author Matheus Henrique Maas
  */
 public class MenuPrincipal {
     public static Scanner entrada;

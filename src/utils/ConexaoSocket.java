@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author lucas
+ * @author Matheus Henrique Maas
  */
 public class ConexaoSocket {
     private static String ADDRESS;

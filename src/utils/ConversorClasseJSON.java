@@ -8,7 +8,7 @@ import org.json.simple.parser.JSONParser;
 
 /**
  *
- * @author Matheus
+ * @author Matheus Henrique Maas
  */
 public class ConversorClasseJSON {
 
