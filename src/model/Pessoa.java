@@ -44,10 +44,4 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
-    @Override
-    public String toString() {
-        return "Pessoa{" + "cpf=" + cpf + ", nome=" + nome + ", endereco=" + endereco + '}';
-    }
-
 }
-

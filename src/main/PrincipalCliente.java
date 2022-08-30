@@ -1,19 +1,18 @@
-
 package main;
 
 import view.MenuPrincipal;
 
 /**
  *
- * @author matheus
+ * @author Matheus Henrique Maas
  */
 public class PrincipalCliente {
 
     public static void main(String[] args) {
-        
-         MenuPrincipal menuPrincipal = new MenuPrincipal();
-    
-         menuPrincipal.iniciarMenu();
+
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+
+        menuPrincipal.iniciarMenu();
     }
-    
+
 }

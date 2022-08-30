@@ -1,6 +1,8 @@
 package utils;
 
 import java.text.ParseException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import model.Funcao;
 import model.Pessoa;
 import org.json.simple.JSONObject;
@@ -15,10 +17,14 @@ public class ConversorClasseJSON {
     public String PessoaParaJson(Pessoa pessoa, String tipoOperacao) {
 
         JSONObject jsonPessoa = new JSONObject();
-        jsonPessoa.put("operacao", tipoOperacao);
-        jsonPessoa.put("cpf", pessoa.getCpf());
-        jsonPessoa.put("nome", pessoa.getNome());
-        jsonPessoa.put("endereco", pessoa.getEndereco());
+        LinkedHashMap test = new LinkedHashMap();
+
+        test.put("operacao", tipoOperacao);
+        test.put("nome", pessoa.getNome());
+        test.put("cpf", pessoa.getCpf());
+        test.put("endereco", pessoa.getEndereco());
+
+        jsonPessoa = new JSONObject(test);
 
         return jsonPessoa.toJSONString();
     }
