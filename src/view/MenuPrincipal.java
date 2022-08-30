@@ -18,8 +18,8 @@ public class MenuPrincipal {
     public void iniciarMenu() {
         entrada = new Scanner(System.in);
 
-        System.out.println("Para o cliente precisamos do endereço e da porta, por favor informe abaixo.\n");
-        System.out.println("Endereço: ");
+        System.out.println("Para o cliente precisamos do endereço IP e da porta, por favor informe abaixo.\n");
+        System.out.println("Endereço IP: ");
         String endereco = entrada.nextLine();
         System.out.println("\nPorta: ");
         int porta = entrada.nextInt();
@@ -39,18 +39,18 @@ public class MenuPrincipal {
             controllerFuncao = new ControllerFuncao();
 
             System.out.println("\nMenu de Opções Cliente\n");
-            System.out.print("1.) Inserir \n");
-            System.out.print("2.) Listar\n");
+            System.out.print("1 Inserir \n");
+            System.out.print("2 Listar\n");
             //System.out.print("3.) Buscar.\n");
             // System.out.print("4.) Deletar.\n");
             // System.out.print("5.) Atualizar\n");
-            System.out.print("6.) Sair\n");
+            System.out.print("6 Sair\n");
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
             
             System.out.println("Selecione a Classe desejada: ");
-            System.out.print("1.) Pessoa \n");
-            System.out.print("2.) Empresa\n");
+            System.out.print("1 Pessoa \n");
+            System.out.print("2 Funcao\n");
             classe = entrada.nextInt();
 
             switch (opcao) {
