@@ -2,13 +2,17 @@ package model;
 
 /**
  *
- * @author lucas
+ * @author Matheus Henrique Maas
  */
 public class Pessoa {
-    
+
     private String cpf;
     private String nome;
     private String endereco;
+
+    public Pessoa() {
+
+    }
 
     public Pessoa(String cpf, String nome, String endereco) {
         this.cpf = cpf;
@@ -38,5 +42,12 @@ public class Pessoa {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
-    }  
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" + "cpf=" + cpf + ", nome=" + nome + ", endereco=" + endereco + '}';
+    }
+
 }
+
