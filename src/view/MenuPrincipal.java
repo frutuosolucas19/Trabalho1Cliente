@@ -14,6 +14,8 @@ public class MenuPrincipal {
     public static Scanner entrada;
     private static ControllerPessoa controllerPessoa;
     private static ControllerFuncao controllerFuncao;
+    int opcao;
+    int classe = 0;
 
     public void iniciarMenu() {
         entrada = new Scanner(System.in);
@@ -31,8 +33,8 @@ public class MenuPrincipal {
 
     public void opcoesDoMenu() {
 
-        int opcao;
-        int classe;
+        
+        
 
         do {
             controllerPessoa = new ControllerPessoa();
@@ -48,11 +50,10 @@ public class MenuPrincipal {
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
             
-            System.out.println("Selecione a Classe desejada: ");
-            System.out.print("1 Pessoa \n");
-            System.out.print("2 Funcao\n");
-            classe = entrada.nextInt();
-
+            if(opcao != 6){
+            opcoesDaClasse();
+            }
+            
             switch (opcao) {
 
                 case 1:
@@ -65,7 +66,9 @@ public class MenuPrincipal {
                     break;
 
                 case 2:
-                    //do something
+                    if(classe==1){
+                        controllerPessoa.listarPessoas();
+                    }
                     break;
 
                 case 3:
@@ -88,7 +91,25 @@ public class MenuPrincipal {
                     System.out.println(opcao + " não é um valor válido do menu, por favor digite um valor válido.");
 
             }
-        } while (opcao != 6 /*Exit loop when choice is 6*/);
+        } while (opcao != 6);
 
     }
+    
+    public void opcoesDaClasse(){
+        
+        do{
+       
+            System.out.println("\nDigite o número correspondente à Classe desejada: ");
+            System.out.print("1 Pessoa \n");
+            System.out.print("2 Funcao\n");
+            classe = entrada.nextInt();
+            
+            if(classe != 1 && classe !=2){
+                System.out.println("'"+classe+"'" + " não é um valor válido para a classe, por favor digite um valor válido.");
+            }
+         
+            
+    }while(classe != 1 && classe != 2);
+        }
+    
 }

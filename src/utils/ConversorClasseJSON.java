@@ -20,6 +20,7 @@ public class ConversorClasseJSON {
         LinkedHashMap test = new LinkedHashMap();
 
         test.put("operacao", tipoOperacao);
+        test.put("classe", "pessoa");
         test.put("nome", pessoa.getNome());
         test.put("cpf", pessoa.getCpf());
         test.put("endereco", pessoa.getEndereco());

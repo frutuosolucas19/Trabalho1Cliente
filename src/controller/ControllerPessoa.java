@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
 import model.Pessoa;
+import org.json.simple.JSONObject;
 import utils.ConexaoSocket;
 import utils.ConversorClasseJSON;
 
@@ -49,5 +50,22 @@ public class ControllerPessoa {
          } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE,null, ex);
          }
+    }
+    
+     public void listarPessoas() {
+        JSONObject pessoaJson = new JSONObject();  
+        pessoaJson.put("operacao", "2");
+        pessoaJson.put("classe", "pessoa");
+        msg = pessoaJson.toJSONString();
+        
+        try {
+            ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
+            conexaoSocket.setMensagem(msg);
+            String resposta  = conexaoSocket.call();
+            
+            System.out.println(resposta);
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
