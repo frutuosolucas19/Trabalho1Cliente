@@ -38,49 +38,64 @@ public class MenuPrincipal {
             controllerFuncao = new ControllerFuncao();
 
             System.out.println("\nMenu de Opções Cliente\n");
-            System.out.print("1 Inserir \n");
-            System.out.print("2 Listar\n");
+            System.out.print("1.) Inserir \n");
+            System.out.print("2.) Listar\n");
             //System.out.print("3.) Buscar.\n");
             // System.out.print("4.) Deletar.\n");
             // System.out.print("5.) Atualizar\n");
-            System.out.print("6 Sair\n");
+            System.out.print("6.) Sair\n");
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
 
             if (opcao != 6) {
-                opcoesDaClasse();
+                defineClasse();
             }
 
             switch (opcao) {
 
                 case 1:
                     if (classe == 1) {
-                        controllerPessoa.inserirPessoa();
+                        controllerPessoa.inserePessoa();
                     }
                     if (classe == 2) {
-                        controllerFuncao.inserirFuncao();
+                        controllerFuncao.insereFuncao();
                     }
                     break;
 
                 case 2:
                     if (classe == 1) {
-                        controllerPessoa.listarPessoas();
+                        controllerPessoa.listaPessoas();
                     }
                     if (classe == 2) {
-                        controllerFuncao.listarFuncoes();
+                        controllerFuncao.listaFuncoes();
                     }
                     break;
 
                 case 3:
-                    //do something
+                    if (classe == 1) {
+                        //    controllerPessoa.buscaPessoa();
+                    }
+                    if (classe == 2) {
+                        //    controllerFuncao.buscaFuncao();
+                    }
                     break;
 
                 case 4:
-                    //do something
+                    if (classe == 1) {
+                        //controllerPessoa.deletaPessoa();
+                    }
+                    if (classe == 2) {
+                        //controllerFuncao.deletaFuncao();
+                    }
                     break;
 
                 case 5:
-                    //do something
+                    if (classe == 1) {
+                        //controllerPessoa.atualizaPessoa();
+                    }
+                    if (classe == 2) {
+                        //controllerFuncao.atualizaFuncao();
+                    }
                     break;
 
                 case 6:
@@ -95,13 +110,13 @@ public class MenuPrincipal {
 
     }
 
-    public void opcoesDaClasse() {
+    public void defineClasse() {
 
         do {
 
             System.out.println("\nDigite o número correspondente à Classe desejada: ");
-            System.out.print("1 Pessoa \n");
-            System.out.print("2 Funcao\n");
+            System.out.print("1.) Pessoa \n");
+            System.out.print("2.) Funcao\n");
             classe = entrada.nextInt();
 
             if (classe != 1 && classe != 2) {

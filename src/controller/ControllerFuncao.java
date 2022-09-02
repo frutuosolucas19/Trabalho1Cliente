@@ -20,7 +20,7 @@ public class ControllerFuncao {
     private ConversorClasseJSON conversorCJ;
     Scanner entrada;
 
-    public void inserirFuncao() {
+    public void insereFuncao() {
         String operacao = "INSERT";
         funcao = new Funcao();
         conversorCJ = new ConversorClasseJSON();
@@ -52,7 +52,7 @@ public class ControllerFuncao {
         }
     }
 
-    public void listarFuncoes() {
+    public void listaFuncoes() {
         JSONObject funcaoJson = new JSONObject();
         funcaoJson.put("operacao", "2");
         funcaoJson.put("classe", "funcao");

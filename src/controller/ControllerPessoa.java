@@ -20,7 +20,7 @@ public class ControllerPessoa {
     private ConversorClasseJSON conversorCJ;
     Scanner entrada;
 
-    public void inserirPessoa() {
+    public void inserePessoa() {
         String operacao = "INSERT";
         pessoa = new Pessoa();
         conversorCJ = new ConversorClasseJSON();
@@ -52,7 +52,7 @@ public class ControllerPessoa {
          }
     }
     
-     public void listarPessoas() {
+     public void listaPessoas() {
         JSONObject pessoaJson = new JSONObject();  
         pessoaJson.put("operacao", "2");
         pessoaJson.put("classe", "pessoa");
