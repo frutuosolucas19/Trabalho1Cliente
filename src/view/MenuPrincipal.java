@@ -33,9 +33,6 @@ public class MenuPrincipal {
 
     public void opcoesDoMenu() {
 
-        
-        
-
         do {
             controllerPessoa = new ControllerPessoa();
             controllerFuncao = new ControllerFuncao();
@@ -49,25 +46,28 @@ public class MenuPrincipal {
             System.out.print("6 Sair\n");
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
-            
-            if(opcao != 6){
-            opcoesDaClasse();
+
+            if (opcao != 6) {
+                opcoesDaClasse();
             }
-            
+
             switch (opcao) {
 
                 case 1:
-                    if(classe==1){
-                    controllerPessoa.inserirPessoa();
+                    if (classe == 1) {
+                        controllerPessoa.inserirPessoa();
                     }
-                    if(classe==2){
-                        //controllerFuncao.inserirFuncao();
+                    if (classe == 2) {
+                        controllerFuncao.inserirFuncao();
                     }
                     break;
 
                 case 2:
-                    if(classe==1){
+                    if (classe == 1) {
                         controllerPessoa.listarPessoas();
+                    }
+                    if (classe == 2) {
+                        controllerFuncao.listarFuncoes();
                     }
                     break;
 
@@ -94,22 +94,21 @@ public class MenuPrincipal {
         } while (opcao != 6);
 
     }
-    
-    public void opcoesDaClasse(){
-        
-        do{
-       
+
+    public void opcoesDaClasse() {
+
+        do {
+
             System.out.println("\nDigite o número correspondente à Classe desejada: ");
             System.out.print("1 Pessoa \n");
             System.out.print("2 Funcao\n");
             classe = entrada.nextInt();
-            
-            if(classe != 1 && classe !=2){
-                System.out.println("'"+classe+"'" + " não é um valor válido para a classe, por favor digite um valor válido.");
+
+            if (classe != 1 && classe != 2) {
+                System.out.println("'" + classe + "'" + " não é um valor válido para a classe, por favor digite um valor válido.");
             }
-         
-            
-    }while(classe != 1 && classe != 2);
-        }
-    
+
+        } while (classe != 1 && classe != 2);
+    }
+
 }
