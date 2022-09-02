@@ -73,7 +73,7 @@ public class MenuPrincipal {
 
                 case 3:
                     if (classe == 1) {
-                        //    controllerPessoa.buscaPessoa();
+                        controllerPessoa.buscaPessoa();
                     }
                     if (classe == 2) {
                         //    controllerFuncao.buscaFuncao();
@@ -82,7 +82,7 @@ public class MenuPrincipal {
 
                 case 4:
                     if (classe == 1) {
-                        //controllerPessoa.deletaPessoa();
+                        controllerPessoa.deletaPessoa();
                     }
                     if (classe == 2) {
                         //controllerFuncao.deletaFuncao();
@@ -91,7 +91,7 @@ public class MenuPrincipal {
 
                 case 5:
                     if (classe == 1) {
-                        //controllerPessoa.atualizaPessoa();
+                        controllerPessoa.atualizaPessoa();
                     }
                     if (classe == 2) {
                         //controllerFuncao.atualizaFuncao();
