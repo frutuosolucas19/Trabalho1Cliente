@@ -21,6 +21,7 @@ public class ControllerPessoa {
     Scanner entrada;
 
     public void inserePessoa() {
+
         String operacao = "INSERT";
         pessoa = new Pessoa();
         conversorCJ = new ConversorClasseJSON();
@@ -41,6 +42,7 @@ public class ControllerPessoa {
 
         msg = conversorCJ.PessoaParaJson(pessoa, operacao);
         System.out.println(msg);
+
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
             conexaoSocket.setMensagem(msg);
@@ -53,6 +55,7 @@ public class ControllerPessoa {
     }
 
     public void listaPessoas() {
+
         JSONObject pessoasJson = new JSONObject();
         pessoasJson.put("operacao", "LIST");
         pessoasJson.put("classe", "pessoa");
@@ -112,6 +115,7 @@ public class ControllerPessoa {
     }
 
     public void atualizaPessoa() {
+
         String operacao = "UPDATE";
         pessoa = new Pessoa();
         conversorCJ = new ConversorClasseJSON();
@@ -146,5 +150,4 @@ public class ControllerPessoa {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

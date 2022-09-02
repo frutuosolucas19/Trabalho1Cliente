@@ -40,9 +40,9 @@ public class MenuPrincipal {
             System.out.println("\nMenu de Opções Cliente\n");
             System.out.print("1.) Inserir \n");
             System.out.print("2.) Listar\n");
-            //System.out.print("3.) Buscar.\n");
-            // System.out.print("4.) Deletar.\n");
-            // System.out.print("5.) Atualizar\n");
+            System.out.print("3.) Buscar.\n");
+            System.out.print("4.) Deletar.\n");
+            System.out.print("5.) Atualizar\n");
             System.out.print("6.) Sair\n");
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
@@ -76,7 +76,7 @@ public class MenuPrincipal {
                         controllerPessoa.buscaPessoa();
                     }
                     if (classe == 2) {
-                        //    controllerFuncao.buscaFuncao();
+                        controllerFuncao.buscaFuncao();
                     }
                     break;
 
@@ -85,7 +85,7 @@ public class MenuPrincipal {
                         controllerPessoa.deletaPessoa();
                     }
                     if (classe == 2) {
-                        //controllerFuncao.deletaFuncao();
+                        controllerFuncao.deletaFuncao();
                     }
                     break;
 
@@ -94,7 +94,7 @@ public class MenuPrincipal {
                         controllerPessoa.atualizaPessoa();
                     }
                     if (classe == 2) {
-                        //controllerFuncao.atualizaFuncao();
+                        controllerFuncao.atualizaFuncao();
                     }
                     break;
 
