@@ -17,16 +17,12 @@ public class ConversorClasseJSON {
     public String PessoaParaJson(Pessoa pessoa, String tipoOperacao) {
 
         JSONObject jsonPessoa = new JSONObject();
-        LinkedHashMap test = new LinkedHashMap();
-
-        test.put("operacao", tipoOperacao);
-        test.put("classe", "pessoa");
-        test.put("nome", pessoa.getNome());
-        test.put("cpf", pessoa.getCpf());
-        test.put("endereco", pessoa.getEndereco());
-
-        jsonPessoa = new JSONObject(test);
-
+        jsonPessoa.put("operacao", tipoOperacao);
+        jsonPessoa.put("classe", "pessoa");
+        jsonPessoa.put("nome", pessoa.getNome());
+        jsonPessoa.put("cpf", pessoa.getCpf());
+        jsonPessoa.put("endereco", pessoa.getEndereco());
+        
         return jsonPessoa.toJSONString();
     }
 
