@@ -18,7 +18,7 @@ public class ControllerPessoa {
     private String msg = "";
     private Pessoa pessoa;
     private ConversorClasseJSON conversorCJ;
-    Scanner entrada;
+    Scanner entrada = new Scanner(System.in);
 
     public void inserePessoa() {
 
@@ -26,7 +26,7 @@ public class ControllerPessoa {
         pessoa = new Pessoa();
         conversorCJ = new ConversorClasseJSON();
 
-        entrada = new Scanner(System.in);
+        //entrada = new Scanner(System.in);
 
         System.out.println("\nInsira o nome da pessoa: ");
         String nomePessoa = entrada.nextLine();
@@ -73,14 +73,16 @@ public class ControllerPessoa {
     }
 
     public void buscaPessoa() {
-
+        //entrada = new Scanner(System.in);
+        
         System.out.println("Informe o CPF da pessoa: ");
-        String cpfPessoa = entrada.next();
-
+        String cpfPessoa = entrada.nextLine();
+        
         JSONObject pessoaJson = new JSONObject();
         pessoaJson.put("operacao", "GET");
         pessoaJson.put("classe", "pessoa");
         pessoaJson.put("cpf", cpfPessoa);
+        msg = pessoaJson.toJSONString();
 
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
@@ -94,14 +96,16 @@ public class ControllerPessoa {
     }
 
     public void deletaPessoa() {
-
+        //entrada = new Scanner(System.in);
+        
         System.out.println("Informe o CPF da pessoa: ");
         String cpfPessoa = entrada.next();
-
+        
         JSONObject pessoaJson = new JSONObject();
         pessoaJson.put("operacao", "DELETE");
         pessoaJson.put("classe", "pessoa");
         pessoaJson.put("cpf", cpfPessoa);
+        msg = pessoaJson.toJSONString();
 
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
@@ -120,7 +124,7 @@ public class ControllerPessoa {
         pessoa = new Pessoa();
         conversorCJ = new ConversorClasseJSON();
 
-        entrada = new Scanner(System.in);
+        //entrada = new Scanner(System.in);
 
         System.out.println("Informe o CPF da pessoa: ");
         String cpf = entrada.nextLine();
