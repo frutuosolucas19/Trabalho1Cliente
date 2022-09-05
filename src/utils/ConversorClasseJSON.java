@@ -1,8 +1,6 @@
 package utils;
 
 import java.text.ParseException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import model.Funcao;
 import model.Pessoa;
 import org.json.simple.JSONObject;
@@ -10,7 +8,7 @@ import org.json.simple.parser.JSONParser;
 
 /**
  *
- * @author Matheus Henrique Maas
+ * @author Lucas de Liz Frutuoso e Matheus Henrique Maas
  */
 public class ConversorClasseJSON {
 
@@ -22,7 +20,7 @@ public class ConversorClasseJSON {
         jsonPessoa.put("nome", pessoa.getNome());
         jsonPessoa.put("cpf", pessoa.getCpf());
         jsonPessoa.put("endereco", pessoa.getEndereco());
-        
+
         return jsonPessoa.toJSONString();
     }
 

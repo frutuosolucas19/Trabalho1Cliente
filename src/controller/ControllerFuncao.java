@@ -11,7 +11,7 @@ import utils.ConversorClasseJSON;
 
 /**
  *
- * @author Lucas
+ * @author Lucas de Liz Frutuoso e Matheus Henrique Maas
  */
 public class ControllerFuncao {
 
@@ -21,7 +21,7 @@ public class ControllerFuncao {
     Scanner entrada;
 
     public void insereFuncao() {
-        
+
         String operacao = "INSERT";
         funcao = new Funcao();
         conversorCJ = new ConversorClasseJSON();
@@ -42,7 +42,7 @@ public class ControllerFuncao {
 
         msg = conversorCJ.FuncaoParaJson(funcao, operacao);
         System.out.println(msg);
-        
+
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
             conexaoSocket.setMensagem(msg);
@@ -55,7 +55,7 @@ public class ControllerFuncao {
     }
 
     public void listaFuncoes() {
-        
+
         JSONObject funcaoJson = new JSONObject();
         funcaoJson.put("operacao", "LIST");
         funcaoJson.put("classe", "funcao");

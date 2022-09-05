@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Matheus Henrique Maas
+ * @author Lucas de Liz Frutuoso e Matheus Henrique Maas
  */
 public class ConexaoSocket {
 

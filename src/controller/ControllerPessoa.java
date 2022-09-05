@@ -11,7 +11,7 @@ import utils.ConversorClasseJSON;
 
 /**
  *
- * @author Matheus Henrique Maas
+ * @author Lucas de Liz Frutuoso e Matheus Henrique Maas
  */
 public class ControllerPessoa {
 
@@ -27,7 +27,6 @@ public class ControllerPessoa {
         conversorCJ = new ConversorClasseJSON();
 
         //entrada = new Scanner(System.in);
-
         System.out.println("\nInsira o nome da pessoa: ");
         String nomePessoa = entrada.nextLine();
         pessoa.setNome(nomePessoa);
@@ -74,10 +73,10 @@ public class ControllerPessoa {
 
     public void buscaPessoa() {
         //entrada = new Scanner(System.in);
-        
+
         System.out.println("Informe o CPF da pessoa: ");
         String cpfPessoa = entrada.nextLine();
-        
+
         JSONObject pessoaJson = new JSONObject();
         pessoaJson.put("operacao", "GET");
         pessoaJson.put("classe", "pessoa");
@@ -97,10 +96,10 @@ public class ControllerPessoa {
 
     public void deletaPessoa() {
         //entrada = new Scanner(System.in);
-        
+
         System.out.println("Informe o CPF da pessoa: ");
         String cpfPessoa = entrada.next();
-        
+
         JSONObject pessoaJson = new JSONObject();
         pessoaJson.put("operacao", "DELETE");
         pessoaJson.put("classe", "pessoa");
@@ -125,7 +124,6 @@ public class ControllerPessoa {
         conversorCJ = new ConversorClasseJSON();
 
         //entrada = new Scanner(System.in);
-
         System.out.println("Informe o CPF da pessoa: ");
         String cpf = entrada.nextLine();
         pessoa.setCpf(cpf);

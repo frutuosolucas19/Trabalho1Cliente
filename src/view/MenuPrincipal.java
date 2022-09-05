@@ -7,7 +7,7 @@ import utils.ConexaoSocket;
 
 /**
  *
- * @author Matheus Henrique Maas
+ * @author Lucas de Liz Frutuoso e Matheus Henrique Maas
  */
 public class MenuPrincipal {
 

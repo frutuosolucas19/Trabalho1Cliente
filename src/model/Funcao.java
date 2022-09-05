@@ -2,7 +2,7 @@ package model;
 
 /**
  *
- * @author Matheus Henrique Maas
+ * @author Lucas de Liz Frutuoso e Matheus Henrique Maas
  */
 public class Funcao {
 
