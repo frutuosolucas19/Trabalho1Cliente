@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
 import model.Funcao;
+import model.Pessoa;
 import org.json.simple.JSONObject;
 import utils.ConexaoSocket;
 import utils.ConversorClasseJSON;
@@ -18,15 +19,13 @@ public class ControllerFuncao {
     private String msg = "";
     private Funcao funcao;
     private ConversorClasseJSON conversorCJ;
-    Scanner entrada;
+    Scanner entrada = new Scanner(System.in);
 
     public void insereFuncao() {
 
         String operacao = "INSERT";
         funcao = new Funcao();
         conversorCJ = new ConversorClasseJSON();
-
-        entrada = new Scanner(System.in);
 
         System.out.println("\nInsira o nome da Função: ");
         String nomefuncao = entrada.nextLine();
@@ -120,8 +119,6 @@ public class ControllerFuncao {
         funcao = new Funcao();
         conversorCJ = new ConversorClasseJSON();
 
-        entrada = new Scanner(System.in);
-
         System.out.println("\nInsira o nome da Função: ");
         String nomefuncao = entrada.nextLine();
         funcao.setNome(nomefuncao);
@@ -150,5 +147,42 @@ public class ControllerFuncao {
         } catch (IOException ex) {
             Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void associaFuncaoPessoa(Pessoa pessoa) {
+
+        System.out.println(".............Aqui será mostrado as pessoas.........");
+
+        System.out.println("Informe o CPF: ");
+        String cpfPessoa = entrada.next();
+
+        System.out.println(".............Aqui será mostrado as funções.........");
+
+        System.out.println("Informe o nome da Função: ");
+        String nomeFuncao = entrada.next();
+
+        associaPessoa(cpfPessoa, nomeFuncao);
+
+    }
+
+    private String associaPessoa(String cpfPessoa, String nomeFuncao) {
+
+        JSONObject funcaoJson = new JSONObject();
+        funcaoJson.put("operacao", "INSERT");
+        funcaoJson.put("entidade", "funcao");
+        funcaoJson.put("cpf", cpfPessoa);
+        funcaoJson.put("nomeFuncao", nomeFuncao);
+        msg = funcaoJson.toJSONString();
+        String resposta = "";
+
+        try {
+            ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
+            conexaoSocket.setMensagem(msg);
+            resposta = conexaoSocket.call();
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return resposta;
     }
 }
