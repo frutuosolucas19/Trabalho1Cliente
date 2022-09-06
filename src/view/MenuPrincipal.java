@@ -59,6 +59,7 @@ public class MenuPrincipal {
                     }
                     if (classe == 2) {
                         controllerFuncao.insereFuncao();
+                        menuAssociaPessoa();
                     }
                     break;
 
@@ -124,6 +125,16 @@ public class MenuPrincipal {
             }
 
         } while (classe != 1 && classe != 2);
+    }
+
+    public void menuAssociaPessoa() {
+
+        System.out.println("Deseja vincular uma pessoa nesta função?");
+        String opcao = entrada.nextLine();
+
+        if (opcao.equalsIgnoreCase("s")) {
+            controllerFuncao.associaFuncaoPessoa(controllerFuncao.getNomeFuncao());
+        }
     }
 
 }

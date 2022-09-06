@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
 import model.Funcao;
-import model.Pessoa;
 import org.json.simple.JSONObject;
 import utils.ConexaoSocket;
 import utils.ConversorClasseJSON;
@@ -30,6 +29,8 @@ public class ControllerFuncao {
         System.out.println("\nInsira o nome da Função: ");
         String nomefuncao = entrada.nextLine();
         funcao.setNome(nomefuncao);
+
+        getNomeFuncao();
 
         System.out.println("Informe o Setor da Função: ");
         String setorFuncao = entrada.nextLine();
@@ -149,17 +150,12 @@ public class ControllerFuncao {
         }
     }
 
-    public void associaFuncaoPessoa(Pessoa pessoa) {
+    public void associaFuncaoPessoa(String nomeFuncao) {
 
         System.out.println(".............Aqui será mostrado as pessoas.........");
 
         System.out.println("Informe o CPF: ");
         String cpfPessoa = entrada.next();
-
-        System.out.println(".............Aqui será mostrado as funções.........");
-
-        System.out.println("Informe o nome da Função: ");
-        String nomeFuncao = entrada.next();
 
         associaPessoa(cpfPessoa, nomeFuncao);
 
@@ -184,5 +180,11 @@ public class ControllerFuncao {
         }
 
         return resposta;
+    }
+
+    public String getNomeFuncao() {
+
+        return funcao.getNome();
+
     }
 }
