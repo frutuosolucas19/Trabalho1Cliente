@@ -39,6 +39,8 @@ public class ConversorClasseJSON {
     public String FuncaoParaJson(Funcao funcao, String tipoOperacao) {
 
         JSONObject jsonFuncao = new JSONObject();
+        jsonFuncao.put("operacao", tipoOperacao);
+        jsonFuncao.put("classe", "funcao");
         jsonFuncao.put("nome", funcao.getNome());
         jsonFuncao.put("setor", funcao.getSetor());
         jsonFuncao.put("salario", funcao.getSalario());

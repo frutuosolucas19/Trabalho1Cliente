@@ -81,6 +81,7 @@ public class ControllerFuncao {
         pessoaJson.put("operacao", "GET");
         pessoaJson.put("classe", "funcao");
         pessoaJson.put("nome", nomeFuncao);
+        msg = pessoaJson.toJSONString();
 
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
@@ -99,9 +100,10 @@ public class ControllerFuncao {
         String nomeFuncao = entrada.next();
 
         JSONObject pessoaJson = new JSONObject();
-        pessoaJson.put("operacao", "GET");
+        pessoaJson.put("operacao", "DELETE");
         pessoaJson.put("classe", "funcao");
         pessoaJson.put("nome", nomeFuncao);
+        msg = pessoaJson.toJSONString();
 
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
