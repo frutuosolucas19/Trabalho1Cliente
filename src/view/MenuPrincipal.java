@@ -43,11 +43,12 @@ public class MenuPrincipal {
             System.out.print("3.) Buscar.\n");
             System.out.print("4.) Deletar.\n");
             System.out.print("5.) Atualizar\n");
-            System.out.print("6.) Sair\n");
+            System.out.print("6.) Associar Função a Pessoa\n");
+            System.out.print("7.) Sair\n");
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
 
-            if (opcao != 6) {
+            if (opcao != 7) {
                 defineClasse();
             }
 
@@ -59,7 +60,6 @@ public class MenuPrincipal {
                     }
                     if (classe == 2) {
                         controllerFuncao.insereFuncao();
-                        menuAssociaPessoa();
                     }
                     break;
 
@@ -98,8 +98,15 @@ public class MenuPrincipal {
                         controllerFuncao.atualizaFuncao();
                     }
                     break;
-
                 case 6:
+                    if (classe == 1) {
+                        System.out.println("Opção inexistente.");
+                    }
+                    if (classe == 2) {
+                        controllerFuncao.associaFuncaoPessoa();
+                    }
+                    break;
+                case 7:
                     System.out.println("Finalizando sistema...");
                     System.exit(0);
                     break;
@@ -125,16 +132,6 @@ public class MenuPrincipal {
             }
 
         } while (classe != 1 && classe != 2);
-    }
-
-    public void menuAssociaPessoa() {
-
-        System.out.println("Deseja vincular uma pessoa nesta função?");
-        String opcao = entrada.nextLine();
-
-        if (opcao.equalsIgnoreCase("s")) {
-            controllerFuncao.associaFuncaoPessoa(controllerFuncao.getNomeFuncao());
-        }
     }
 
 }

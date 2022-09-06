@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
@@ -18,6 +20,7 @@ public class ControllerPessoa {
     private String msg = "";
     private Pessoa pessoa;
     private ConversorClasseJSON conversorCJ;
+    private List<Pessoa> pessoas1 = new ArrayList<>();
     Scanner entrada = new Scanner(System.in);
 
     public void inserePessoa() {
@@ -151,5 +154,14 @@ public class ControllerPessoa {
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public String listaPessoasMensagem() {
+        
+        JSONObject pessoaJSON = new JSONObject();  
+        pessoaJSON.put("operacao", "LIST");
+        pessoaJSON.put("entidade", "pessoa");
+        msg = pessoaJSON.toJSONString();
+    
+        return msg;  
     }
 }
