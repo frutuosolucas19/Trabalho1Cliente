@@ -14,6 +14,12 @@ public class Funcao {
 
     }
 
+    public Funcao(String nome, String setor) {
+        this.nome = nome;
+        this.setor = setor;
+    }
+    
+
     public String getNome() {
         return nome;
     }

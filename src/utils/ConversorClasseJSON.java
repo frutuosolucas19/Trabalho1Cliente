@@ -1,6 +1,8 @@
 package utils;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Funcao;
 import model.Pessoa;
 import org.json.simple.JSONObject;
@@ -48,7 +50,7 @@ public class ConversorClasseJSON {
         return jsonFuncao.toJSONString();
     }
 
-    public Funcao JsonParaFuncao(String mensagem) throws org.json.simple.parser.ParseException {
+    public Funcao JsonParaFuncao(String mensagem) throws ParseException {
 
         JSONObject json = new JSONObject();
 
@@ -58,6 +60,35 @@ public class ConversorClasseJSON {
         funcao.setSalario((Double) json.get("salario"));
 
         return funcao;
+    }
+     public Funcao JsonParaFuncaoAux(String mensagem) throws ParseException {
+
+        JSONObject json = new JSONObject();
+
+        Funcao funcao = new Funcao();
+        funcao.setNome((String) json.get("nome"));
+        funcao.setSetor((String) json.get("setor"));
+
+        return funcao;
+   }
+     
+    public List<Funcao> JsonParaFuncaoList(String mensagem) throws ParseException, org.json.simple.parser.ParseException {
+        
+        List<Funcao> listaFuncao = new ArrayList<>();
+        
+        JSONObject jsonObjeto;
+        JSONParser parser = new JSONParser();
+        jsonObjeto = (JSONObject) parser.parse(mensagem);
+
+        for (int i = 0; i < jsonObjeto.size(); i++) {
+            String funcao = jsonObjeto.get(String.valueOf(i)).toString();
+            Funcao f1 = new Funcao();
+            f1 = JsonParaFuncaoAux(funcao);
+
+            listaFuncao.add(f1);
+        }
+
+        return listaFuncao;
     }
 
     public String cpfPessoa(String mensagem) throws org.json.simple.parser.ParseException {

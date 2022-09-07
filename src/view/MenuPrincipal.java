@@ -2,6 +2,7 @@ package view;
 
 import controller.ControllerFuncao;
 import controller.ControllerPessoa;
+import java.text.ParseException;
 import java.util.Scanner;
 import utils.ConexaoSocket;
 
@@ -17,7 +18,7 @@ public class MenuPrincipal {
     int opcao;
     int classe = 0;
 
-    public void iniciarMenu() {
+    public void iniciarMenu() throws ParseException {
         entrada = new Scanner(System.in);
 
         System.out.println("Para o cliente precisamos do endereço IP e da porta, por favor informe abaixo.\n");
@@ -31,7 +32,7 @@ public class MenuPrincipal {
         opcoesDoMenu();
     }
 
-    public void opcoesDoMenu() {
+    public void opcoesDoMenu() throws ParseException {
 
         do {
             controllerPessoa = new ControllerPessoa();
@@ -114,7 +115,7 @@ public class MenuPrincipal {
                     System.out.println(opcao + " não é um valor válido do menu, por favor digite um valor válido.");
 
             }
-        } while (opcao != 6);
+        } while (opcao != 7);
 
     }
 

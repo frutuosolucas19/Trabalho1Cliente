@@ -153,7 +153,7 @@ public class ControllerFuncao {
         }
     }
 
-    public void associaFuncaoPessoa() {
+    public void associaFuncaoPessoa() throws java.text.ParseException {
 
         System.out.println("Deseja vincular uma pessoa a uma Função? [s/n]");
         String opcao = entrada.nextLine();
@@ -166,9 +166,9 @@ public class ControllerFuncao {
                 ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
                 conexaoSocket.setMensagem(msg);
                 String retorno = conexaoSocket.call();
-                System.out.println(retorno);
 
                 String menuEmpresa = getFuncao(retorno);
+                //System.out.println(retorno);
 
                 System.out.println("Informe o nome da Função");
                 System.out.println(menuEmpresa);
@@ -190,7 +190,7 @@ public class ControllerFuncao {
 
         JSONObject funcaoJson = new JSONObject();
         funcaoJson.put("operacao", "ASSOCIA");
-        funcaoJson.put("entidade", "funcao");
+        funcaoJson.put("classe", "funcao");
         funcaoJson.put("cpf", cpfPessoa);
         funcaoJson.put("nomeFuncao", nomeFuncao);
         msg = funcaoJson.toJSONString();
@@ -211,18 +211,20 @@ public class ControllerFuncao {
 
         JSONObject funcaoJSON = new JSONObject();
         funcaoJSON.put("operacao", "LIST");
-        funcaoJSON.put("entidade", "funcao");
+        funcaoJSON.put("classe", "funcao");
         msg = funcaoJSON.toJSONString();
 
         return msg;
     }
 
-    public String getFuncao(String mensagem) {
+    public String getFuncao(String mensagem) throws java.text.ParseException {
 
         String menu = "";
 
         try {
-            List<Funcao> listaFuncoes = (List<Funcao>) conversorCJ.JsonParaFuncao(mensagem);
+            
+            ConversorClasseJSON teste = new ConversorClasseJSON();
+            List<Funcao> listaFuncoes = teste.JsonParaFuncaoList(mensagem);
             menu = "Funções Existentes\n";
 
             for (int i = 0; i < listaFuncoes.size(); i++) {
@@ -230,7 +232,6 @@ public class ControllerFuncao {
 
                 menu += "Nome: " + funcao.getNome() + "\n";
                 menu += "Setor: " + funcao.getSetor() + "\n";
-                menu += "Salário: " + funcao.getSalario() + "\n";
             }
         } catch (ParseException ex) {
             Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
