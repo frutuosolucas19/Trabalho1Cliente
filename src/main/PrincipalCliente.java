@@ -1,5 +1,6 @@
 package main;
 
+import java.text.ParseException;
 import view.MenuPrincipal;
 
 /**
@@ -8,7 +9,7 @@ import view.MenuPrincipal;
  */
 public class PrincipalCliente {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException, org.json.simple.parser.ParseException {
 
         MenuPrincipal menuPrincipal = new MenuPrincipal();
 

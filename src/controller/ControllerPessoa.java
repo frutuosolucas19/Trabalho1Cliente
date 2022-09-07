@@ -9,7 +9,7 @@ import java.util.Scanner;
 import model.Pessoa;
 import org.json.simple.JSONObject;
 import utils.ConexaoSocket;
-import utils.ConversorClasseJSON;
+import utils.Conversor;
 
 /**
  *
@@ -19,15 +19,15 @@ public class ControllerPessoa {
 
     private String msg = "";
     private Pessoa pessoa;
-    private ConversorClasseJSON conversorCJ;
+    private Conversor conversorCJ;
     private List<Pessoa> pessoas1 = new ArrayList<>();
-    Scanner entrada = new Scanner(System.in);
+    private Scanner entrada = new Scanner(System.in);
 
     public void inserePessoa() {
 
         String operacao = "INSERT";
         pessoa = new Pessoa();
-        conversorCJ = new ConversorClasseJSON();
+        conversorCJ = new Conversor();
 
         //entrada = new Scanner(System.in);
         System.out.println("\nInsira o nome da pessoa: ");
@@ -124,7 +124,7 @@ public class ControllerPessoa {
 
         String operacao = "UPDATE";
         pessoa = new Pessoa();
-        conversorCJ = new ConversorClasseJSON();
+        conversorCJ = new Conversor();
 
         //entrada = new Scanner(System.in);
         System.out.println("Informe o CPF da pessoa: ");
@@ -164,4 +164,6 @@ public class ControllerPessoa {
     
         return msg;  
     }
+    
+   
 }

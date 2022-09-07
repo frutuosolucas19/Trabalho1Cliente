@@ -18,22 +18,21 @@ public class MenuPrincipal {
     int opcao;
     int classe = 0;
 
-    public void iniciarMenu() throws ParseException {
-        entrada = new Scanner(System.in);
+    public void iniciarMenu() throws ParseException, org.json.simple.parser.ParseException {
+          // System.out.println("Para o cliente precisamos do endereço IP e da porta, por favor informe abaixo.\n");
+       // System.out.println("Endereço IP: ");
+       // String endereco = entrada.nextLine();
+      //  System.out.println("\nPorta: ");
+      //  int porta = entrada.nextInt();
 
-        System.out.println("Para o cliente precisamos do endereço IP e da porta, por favor informe abaixo.\n");
-        System.out.println("Endereço IP: ");
-        String endereco = entrada.nextLine();
-        System.out.println("\nPorta: ");
-        int porta = entrada.nextInt();
+        //ConexaoSocket.getInstance().init(endereco, porta);
 
-        ConexaoSocket.getInstance().init(endereco, porta);
-
+        ConexaoSocket.getInstance().init("127.0.0.1", 80);
         opcoesDoMenu();
     }
 
-    public void opcoesDoMenu() throws ParseException {
-
+    public void opcoesDoMenu() throws ParseException, org.json.simple.parser.ParseException {
+            entrada = new Scanner(System.in); 
         do {
             controllerPessoa = new ControllerPessoa();
             controllerFuncao = new ControllerFuncao();
@@ -49,7 +48,7 @@ public class MenuPrincipal {
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
 
-            if (opcao != 7) {
+            if (opcao != 7 && opcao != 6) {
                 defineClasse();
             }
 
@@ -99,13 +98,8 @@ public class MenuPrincipal {
                         controllerFuncao.atualizaFuncao();
                     }
                     break;
-                case 6:
-                    if (classe == 1) {
-                        System.out.println("Opção inexistente.");
-                    }
-                    if (classe == 2) {
+                case 6:                   
                         controllerFuncao.associaFuncaoPessoa();
-                    }
                     break;
                 case 7:
                     System.out.println("Finalizando sistema...");
@@ -120,7 +114,7 @@ public class MenuPrincipal {
     }
 
     public void defineClasse() {
-
+            entrada = new Scanner(System.in);
         do {
 
             System.out.println("\nDigite o número correspondente à Classe desejada: ");

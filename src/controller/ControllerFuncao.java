@@ -1,16 +1,18 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Scanner;
 import model.Funcao;
+import model.Pessoa;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import utils.ConexaoSocket;
-import utils.ConversorClasseJSON;
-import static view.MenuPrincipal.entrada;
+import utils.Conversor;
 
 /**
  *
@@ -20,14 +22,14 @@ public class ControllerFuncao {
 
     private String msg = "";
     private Funcao funcao;
-    private ConversorClasseJSON conversorCJ;
-    Scanner entrada = new Scanner(System.in);
+    private Conversor conversorCJ;
+    Scanner entrada;
 
     public void insereFuncao() {
-
+        entrada = new Scanner(System.in);
         String operacao = "INSERT";
         funcao = new Funcao();
-        conversorCJ = new ConversorClasseJSON();
+        conversorCJ = new Conversor();
 
         System.out.println("\nInsira o nome da Função: ");
         String nomefuncao = entrada.nextLine();
@@ -74,7 +76,7 @@ public class ControllerFuncao {
     }
 
     public void buscaFuncao() {
-
+        entrada = new Scanner(System.in);
         System.out.println("Informe o nome da Função: ");
         String nomeFuncao = entrada.next();
 
@@ -96,7 +98,7 @@ public class ControllerFuncao {
     }
 
     public void deletaFuncao() {
-
+        entrada = new Scanner(System.in);
         System.out.println("Informe o nome da Função: ");
         String nomeFuncao = entrada.next();
 
@@ -118,10 +120,10 @@ public class ControllerFuncao {
     }
 
     public void atualizaFuncao() {
-
+        entrada = new Scanner(System.in);
         String operacao = "UPDATE";
         funcao = new Funcao();
-        conversorCJ = new ConversorClasseJSON();
+        conversorCJ = new Conversor();
 
         System.out.println("\nInsira o nome da Função: ");
         String nomefuncao = entrada.nextLine();
@@ -153,36 +155,51 @@ public class ControllerFuncao {
         }
     }
 
-    public void associaFuncaoPessoa() throws java.text.ParseException {
+    public void associaFuncaoPessoa() throws java.text.ParseException, ParseException {
+        entrada = new Scanner(System.in);
+        String nomeFuncao = null;
+        String cpfPessoa = null;
 
         System.out.println("Deseja vincular uma pessoa a uma Função? [s/n]");
         String opcao = entrada.nextLine();
 
         if (opcao.equalsIgnoreCase("s")) {
 
-            String msg = listaFuncoesMensagem();
+            String msg = listaFuncoesServidor();
 
             try {
                 ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
                 conexaoSocket.setMensagem(msg);
                 String retorno = conexaoSocket.call();
 
-                String menuEmpresa = getFuncao(retorno);
-                //System.out.println(retorno);
+                String menuFunções = getFuncao(retorno);
+                System.out.println(menuFunções);
 
                 System.out.println("Informe o nome da Função");
-                System.out.println(menuEmpresa);
-                String nomeFuncao = entrada.next();
-
-                System.out.println("Informe o CPF: ");
-                String cpfPessoa = entrada.next();
-
-                associaPessoa(cpfPessoa, nomeFuncao);
+                nomeFuncao = entrada.next();
 
             } catch (IOException ex) {
                 Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            String msg2 = listaPessoasServidor();
+
+            try {
+                ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
+                conexaoSocket.setMensagem(msg2);
+                String retorno = conexaoSocket.call();
+
+                String menuPessoas = getPessoa(retorno);
+                System.out.println(menuPessoas);
+
+                System.out.println("Informe o CPF: ");
+                cpfPessoa = entrada.next();
+
+            } catch (IOException ex) {
+                Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            associaPessoa(cpfPessoa, nomeFuncao);
         }
     }
 
@@ -207,7 +224,7 @@ public class ControllerFuncao {
         return resposta;
     }
 
-    public String listaFuncoesMensagem() {
+    public String listaFuncoesServidor() {
 
         JSONObject funcaoJSON = new JSONObject();
         funcaoJSON.put("operacao", "LIST");
@@ -217,26 +234,55 @@ public class ControllerFuncao {
         return msg;
     }
 
-    public String getFuncao(String mensagem) throws java.text.ParseException {
+    public String listaPessoasServidor() {
 
-        String menu = "";
+        JSONObject funcaoJSON = new JSONObject();
+        funcaoJSON.put("operacao", "LIST");
+        funcaoJSON.put("classe", "pessoa");
+        msg = funcaoJSON.toJSONString();
 
-        try {
-            
-            ConversorClasseJSON teste = new ConversorClasseJSON();
-            List<Funcao> listaFuncoes = teste.JsonParaFuncaoList(mensagem);
-            menu = "Funções Existentes\n";
+        return msg;
+    }
 
-            for (int i = 0; i < listaFuncoes.size(); i++) {
-                Funcao funcao = listaFuncoes.get(i);
+    public String getFuncao(String mensagem) throws java.text.ParseException, ParseException {
 
-                menu += "Nome: " + funcao.getNome() + "\n";
-                menu += "Setor: " + funcao.getSetor() + "\n";
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
+        String menuFuncoes;
+
+        Conversor conversorJSONListFuncao = new Conversor();
+        List<Funcao> listaFuncoes = conversorJSONListFuncao.JsonParaFuncaoList(mensagem);
+
+        menuFuncoes = "----Funções Existentes----\n";
+
+        for (int i = 0; i < listaFuncoes.size(); i++) {
+            Funcao funcao = listaFuncoes.get(i);
+
+            menuFuncoes += "Nome: " + funcao.getNome() + "\n";
+            menuFuncoes += "Setor: " + funcao.getSetor() + "\n";
+            menuFuncoes += "Salário: " + funcao.getSalario() + "\n";
+            menuFuncoes += "------------------------------------\n";
         }
 
-        return menu;
+        return menuFuncoes;
+    }
+
+    public String getPessoa(String mensagem) throws java.text.ParseException, ParseException {
+
+        String menuPessoas;
+
+        Conversor conversorJSONListPessoa = new Conversor();
+        List<Pessoa> listaPessoas = conversorJSONListPessoa.JsonParaPessoaList(mensagem);
+
+        menuPessoas = "----Pessoas Existentes----\n";
+
+        for (int i = 0; i < listaPessoas.size(); i++) {
+            Pessoa pessoa = listaPessoas.get(i);
+
+            menuPessoas += "CPF: " + pessoa.getCpf() + "\n";
+            menuPessoas += "Nome: " + pessoa.getNome() + "\n";
+            menuPessoas += "Endereço: " + pessoa.getEndereco() + "\n";
+            menuPessoas += "------------------------------------\n";
+        }
+
+        return menuPessoas;
     }
 }

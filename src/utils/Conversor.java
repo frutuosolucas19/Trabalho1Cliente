@@ -12,7 +12,7 @@ import org.json.simple.parser.JSONParser;
  *
  * @author Lucas de Liz Frutuoso e Matheus Henrique Maas
  */
-public class ConversorClasseJSON {
+public class Conversor {
 
     public String PessoaParaJson(Pessoa pessoa, String tipoOperacao) {
 
@@ -26,10 +26,11 @@ public class ConversorClasseJSON {
         return jsonPessoa.toJSONString();
     }
 
-    public Pessoa JsonParaPessoa(String mensagem) throws ParseException {
+    public Pessoa JsonParaPessoa(String mensagem) throws ParseException, org.json.simple.parser.ParseException {
 
-        JSONObject json = new JSONObject();
-
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(mensagem);
+        
         Pessoa pessoa = new Pessoa();
         pessoa.setCpf((String) json.get("cpf"));
         pessoa.setNome((String) json.get("nome"));
@@ -50,24 +51,15 @@ public class ConversorClasseJSON {
         return jsonFuncao.toJSONString();
     }
 
-    public Funcao JsonParaFuncao(String mensagem) throws ParseException {
+     public Funcao JsonParaFuncao(String mensagem) throws ParseException, org.json.simple.parser.ParseException {
 
-        JSONObject json = new JSONObject();
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(mensagem);
 
         Funcao funcao = new Funcao();
         funcao.setNome((String) json.get("nome"));
         funcao.setSetor((String) json.get("setor"));
         funcao.setSalario((Double) json.get("salario"));
-
-        return funcao;
-    }
-     public Funcao JsonParaFuncaoAux(String mensagem) throws ParseException {
-
-        JSONObject json = new JSONObject();
-
-        Funcao funcao = new Funcao();
-        funcao.setNome((String) json.get("nome"));
-        funcao.setSetor((String) json.get("setor"));
 
         return funcao;
    }
@@ -83,12 +75,31 @@ public class ConversorClasseJSON {
         for (int i = 0; i < jsonObjeto.size(); i++) {
             String funcao = jsonObjeto.get(String.valueOf(i)).toString();
             Funcao f1 = new Funcao();
-            f1 = JsonParaFuncaoAux(funcao);
+            f1 = JsonParaFuncao(funcao);
 
             listaFuncao.add(f1);
         }
 
         return listaFuncao;
+    }
+    
+     public List<Pessoa> JsonParaPessoaList(String mensagem) throws ParseException, org.json.simple.parser.ParseException {
+        
+        List<Pessoa> listaPessoas = new ArrayList<>();
+        
+        JSONObject jsonObjeto;
+        JSONParser parser = new JSONParser();
+        jsonObjeto = (JSONObject) parser.parse(mensagem);
+
+        for (int i = 0; i < jsonObjeto.size(); i++) {
+            String pessoa = jsonObjeto.get(String.valueOf(i)).toString();
+            Pessoa p1 = new Pessoa();
+            p1 = JsonParaPessoa(pessoa);
+
+            listaPessoas.add(p1);
+        }
+
+        return listaPessoas;
     }
 
     public String cpfPessoa(String mensagem) throws org.json.simple.parser.ParseException {
