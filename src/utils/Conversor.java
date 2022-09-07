@@ -64,6 +64,21 @@ public class Conversor {
         return funcao;
    }
      
+       public Funcao JsonParaFuncaoListGeral(String mensagem) throws ParseException, org.json.simple.parser.ParseException {
+
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(mensagem);
+
+        Funcao funcao = new Funcao();
+        funcao.setNome((String) json.get("nome"));
+        funcao.setSetor((String) json.get("setor"));
+        funcao.setSalario((Double) json.get("salario"));
+        String listaPessoas = (String) json.get("listaPessoas");
+        funcao.getPessoas().add((JsonParaPessoa(listaPessoas)));
+
+        return funcao;
+   }
+     
     public List<Funcao> JsonParaFuncaoList(String mensagem) throws ParseException, org.json.simple.parser.ParseException {
         
         List<Funcao> listaFuncao = new ArrayList<>();
@@ -131,5 +146,23 @@ public class Conversor {
 
         return entidade;
     }
+    
+     public List<Funcao> JsonParaListGeral(String mensagem) throws ParseException, org.json.simple.parser.ParseException {
+        
+        List<Funcao> listaGeral = new ArrayList<>();
+        
+        JSONObject jsonObjeto;
+        JSONParser parser = new JSONParser();
+        jsonObjeto = (JSONObject) parser.parse(mensagem);
 
+        for (int i = 0; i < jsonObjeto.size(); i++) {
+            String listaGeralFuncaoPessoa = jsonObjeto.get(String.valueOf(i)).toString();
+            Funcao f1 = new Funcao();
+            f1 = JsonParaFuncaoListGeral(listaGeralFuncaoPessoa);
+
+            listaGeral.add(f1);
+        }
+
+        return listaGeral;
+    }
 }

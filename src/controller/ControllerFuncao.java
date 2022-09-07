@@ -192,14 +192,16 @@ public class ControllerFuncao {
                 String menuPessoas = getPessoa(retorno);
                 System.out.println(menuPessoas);
 
-                System.out.println("Informe o CPF: ");
+                System.out.println("Informe o CPF da pessoa que deseja vincular para a função: ");
                 cpfPessoa = entrada.next();
 
             } catch (IOException ex) {
                 Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            associaPessoa(cpfPessoa, nomeFuncao);
+            String resposta = associaPessoa(cpfPessoa, nomeFuncao);
+            
+            System.out.println(resposta);
         }
     }
 
@@ -207,9 +209,8 @@ public class ControllerFuncao {
 
         JSONObject funcaoJson = new JSONObject();
         funcaoJson.put("operacao", "ASSOCIA");
-        funcaoJson.put("classe", "funcao");
         funcaoJson.put("cpf", cpfPessoa);
-        funcaoJson.put("nomeFuncao", nomeFuncao);
+        funcaoJson.put("nome", nomeFuncao);
         msg = funcaoJson.toJSONString();
         String resposta = "";
 
@@ -285,4 +286,41 @@ public class ControllerFuncao {
 
         return menuPessoas;
     }
+    
+    public String listaGeralFuncaoPessoa() throws java.text.ParseException, ParseException{
+        
+        String menuListaGeral;
+        String retorno = null;
+        
+        JSONObject funcaoJSON = new JSONObject();
+        funcaoJSON.put("operacao", "LIST_GERAL");
+        
+        msg = funcaoJSON.toJSONString();
+
+        try {
+                ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
+                conexaoSocket.setMensagem(msg);
+                retorno = conexaoSocket.call();
+                System.out.println(retorno);
+
+            } catch (IOException ex) {
+                Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        //Conversor conversorJSONListGeral = new Conversor();
+       // List<Funcao> listaFuncoesPessoas = conversorJSONListGeral.JsonParaListGeral(retorno);
+        
+       // menuListaGeral = "----Funções Existentes----\n";
+
+       // for (int i = 0; i < listaFuncoesPessoas.size(); i++) {
+      //      Funcao funcao = listaFuncoesPessoas.get(i);
+//
+      //      menuListaGeral += "Nome: " + funcao.getNome() + "\n";
+      //      menuListaGeral += "Setor: " + funcao.getSetor() + "\n";
+      //      menuListaGeral += "Salário: " + funcao.getSalario() + "\n";
+      //      menuListaGeral += "------------------------------------\n";
+    //    }
+       
+        return retorno;      
+    }  
 }

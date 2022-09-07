@@ -44,11 +44,12 @@ public class MenuPrincipal {
             System.out.print("4.) Deletar.\n");
             System.out.print("5.) Atualizar\n");
             System.out.print("6.) Associar Função a Pessoa\n");
-            System.out.print("7.) Sair\n");
+            System.out.print("7.) Lista de Pessoas com suas Funções\n");
+            System.out.print("8.) Sair\n");
             System.out.print("\nDigite a opção desejada: ");
             opcao = entrada.nextInt();
 
-            if (opcao != 7 && opcao != 6) {
+            if (opcao != 7 && opcao != 6 && opcao != 8) {
                 defineClasse();
             }
 
@@ -101,7 +102,10 @@ public class MenuPrincipal {
                 case 6:                   
                         controllerFuncao.associaFuncaoPessoa();
                     break;
-                case 7:
+                case 7:                   
+                        controllerFuncao.listaGeralFuncaoPessoa();
+                    break;
+                case 8:
                     System.out.println("Finalizando sistema...");
                     System.exit(0);
                     break;
@@ -109,7 +113,7 @@ public class MenuPrincipal {
                     System.out.println(opcao + " não é um valor válido do menu, por favor digite um valor válido.");
 
             }
-        } while (opcao != 7);
+        } while (opcao != 8);
 
     }
 
