@@ -280,7 +280,6 @@ public class ControllerFuncao {
 
     public String listaGeralFuncaoPessoa() throws java.text.ParseException, ParseException {
 
-        String menuListaGeral;
         String retorno = null;
 
         JSONObject funcaoJSON = new JSONObject();
@@ -292,23 +291,48 @@ public class ControllerFuncao {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
             conexaoSocket.setMensagem(msg);
             retorno = conexaoSocket.call();
-            System.out.println(retorno);
+
+            System.out.println(replaceRetorno(retorno));
 
         } catch (IOException ex) {
             Logger.getLogger(ControllerFuncao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        //Conversor conversorJSONListGeral = new Conversor();
-        // List<Funcao> listaFuncoesPessoas = conversorJSONListGeral.JsonParaListGeral(retorno);
-        // menuListaGeral = "----Funções Existentes----\n";
-        // for (int i = 0; i < listaFuncoesPessoas.size(); i++) {
-        //      Funcao funcao = listaFuncoesPessoas.get(i);
-//
-        //      menuListaGeral += "Nome: " + funcao.getNome() + "\n";
-        //      menuListaGeral += "Setor: " + funcao.getSetor() + "\n";
-        //      menuListaGeral += "Salário: " + funcao.getSalario() + "\n";
-        //      menuListaGeral += "------------------------------------\n";
-        //    }
+        //System.out.println(getListPessoas(retorno));
+        return retorno;
+    }
+
+    public String getListPessoas(String retorno) throws java.text.ParseException, ParseException {
+
+        String menuListaGeral;
+
+        Conversor conversorJSONListGeral = new Conversor();
+        List<Funcao> listaFuncoesPessoas = conversorJSONListGeral.JsonParaListGeral(retorno);
+        menuListaGeral = "----Funções Existentes----\n";
+        for (int i = 0; i < listaFuncoesPessoas.size(); i++) {
+            Funcao funcao = listaFuncoesPessoas.get(i);
+
+            menuListaGeral += "Nome: " + funcao.getNome() + "\n";
+            menuListaGeral += "Setor: " + funcao.getSetor() + "\n";
+            menuListaGeral += "Salário: " + funcao.getSalario() + "\n";
+            menuListaGeral += "Salário: " + funcao.getPessoas() + "\n";
+            menuListaGeral += "------------------------------------\n";
+        }
+        return menuListaGeral;
+    }
+
+    public String replaceRetorno(String retorno) {
+        
+        retorno = retorno.replace("},", "\n");
+        retorno = retorno.replace("{\"", "");
+        retorno = retorno.replace("\"", "");
+        retorno = retorno.replace(",", ";");
+        retorno = retorno.replace("}}", "");
+        retorno = retorno.replace("]", "]]");
+        for (int i = 0; i < retorno.length(); i++) {
+            retorno = retorno.replace(i + ":", "[Função{");
+        }
+
         return retorno;
     }
 }

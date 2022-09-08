@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +20,6 @@ public class ControllerPessoa {
     private String msg = "";
     private Pessoa pessoa;
     private Conversor conversorCJ;
-    private List<Pessoa> pessoas1 = new ArrayList<>();
     private Scanner entrada = new Scanner(System.in);
 
     public void inserePessoa() {
