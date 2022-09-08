@@ -19,20 +19,20 @@ public class MenuPrincipal {
     int classe = 0;
 
     public void iniciarMenu() throws ParseException, org.json.simple.parser.ParseException {
-          // System.out.println("Para o cliente precisamos do endereço IP e da porta, por favor informe abaixo.\n");
-       // System.out.println("Endereço IP: ");
-       // String endereco = entrada.nextLine();
-      //  System.out.println("\nPorta: ");
-      //  int porta = entrada.nextInt();
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("Para o cliente precisamos do endereço IP e da porta, por favor informe abaixo.\n");
+        System.out.println("Endereço IP: ");
+        String endereco = entrada.nextLine();
+        System.out.println("\nPorta: ");
+        int porta = entrada.nextInt();
 
-        //ConexaoSocket.getInstance().init(endereco, porta);
+        ConexaoSocket.getInstance().init(endereco, porta);
 
-        ConexaoSocket.getInstance().init("127.0.0.1", 80);
         opcoesDoMenu();
     }
 
     public void opcoesDoMenu() throws ParseException, org.json.simple.parser.ParseException {
-            entrada = new Scanner(System.in); 
+        entrada = new Scanner(System.in);
         do {
             controllerPessoa = new ControllerPessoa();
             controllerFuncao = new ControllerFuncao();
@@ -99,11 +99,11 @@ public class MenuPrincipal {
                         controllerFuncao.atualizaFuncao();
                     }
                     break;
-                case 6:                   
-                        controllerFuncao.associaFuncaoPessoa();
+                case 6:
+                    controllerFuncao.associaFuncaoPessoa();
                     break;
-                case 7:                   
-                        controllerFuncao.listaGeralFuncaoPessoa();
+                case 7:
+                    controllerFuncao.listaGeralFuncaoPessoa();
                     break;
                 case 8:
                     System.out.println("Finalizando sistema...");
@@ -118,7 +118,7 @@ public class MenuPrincipal {
     }
 
     public void defineClasse() {
-            entrada = new Scanner(System.in);
+        entrada = new Scanner(System.in);
         do {
 
             System.out.println("\nDigite o número correspondente à Classe desejada: ");
