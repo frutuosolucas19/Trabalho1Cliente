@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.util.Scanner;
 import model.Pessoa;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import utils.ConexaoSocket;
 import utils.Conversor;
 
@@ -43,20 +44,18 @@ public class ControllerPessoa {
         pessoa.setEndereco(enderecoPessoa);
 
         msg = conversorCJ.PessoaParaJson(pessoa, operacao);
-        System.out.println(msg);
 
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
             conexaoSocket.setMensagem(msg);
             String retorno = conexaoSocket.call();
-            System.out.println(retorno);
 
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void listaPessoas() {
+    public void listaPessoas() throws java.text.ParseException, ParseException {
 
         JSONObject pessoasJson = new JSONObject();
         pessoasJson.put("operacao", "LIST");
@@ -68,13 +67,21 @@ public class ControllerPessoa {
             conexaoSocket.setMensagem(msg);
             String resposta = conexaoSocket.call();
 
-            System.out.println(resposta);
+            if(!"0".equals(resposta)){
+            String menuPessoas = getPessoa(resposta);
+            System.out.println(menuPessoas);
+            }
+            else{
+                System.out.println(resposta);
+            }
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void buscaPessoa() {
+    public void buscaPessoa() throws java.text.ParseException, ParseException {
+        
+        String resposta = null;
         //entrada = new Scanner(System.in);
 
         System.out.println("Informe o CPF da pessoa: ");
@@ -89,9 +96,17 @@ public class ControllerPessoa {
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
             conexaoSocket.setMensagem(msg);
-            String resposta = conexaoSocket.call();
-
-            System.out.println(resposta);
+            resposta = conexaoSocket.call();
+             
+            if(!"Pessoa não encontrada".equals(resposta)&&!"Sem pessoas cadastradas".equals(resposta)){
+             Conversor c1 = new Conversor();
+             Pessoa p2 = c1.JsonParaPessoa(resposta);
+             
+             System.out.println(p2.getCpf()+";"+p2.getNome()+";"+p2.getEndereco());
+            }else{
+                System.out.println(resposta);
+            }
+                
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -140,16 +155,13 @@ public class ControllerPessoa {
         pessoa.setEndereco(enderecoPessoa);
 
         msg = conversorCJ.PessoaParaJson(pessoa, operacao);
-        System.out.println(msg);
+        
         try {
             ConexaoSocket conexaoSocket = ConexaoSocket.getInstance();
             conexaoSocket.setMensagem(msg);
             String retorno = conexaoSocket.call();
+            
             System.out.println(retorno);
-            if (retorno != null) {
-                System.out.println("Dados de " + pessoa.getNome() + " portador do CPF: " + pessoa.getCpf() + " atualizado com sucesso!");
-                pessoa = new Pessoa();
-            }
 
         } catch (IOException ex) {
             Logger.getLogger(ControllerPessoa.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,5 +177,29 @@ public class ControllerPessoa {
         return msg;  
     }
     
-   
+     public String getPessoa(String mensagem) throws java.text.ParseException, ParseException {
+
+        String menuPessoas;
+
+        Conversor conversorJSONListPessoa = new Conversor();
+        List<Pessoa> listaPessoas = conversorJSONListPessoa.JsonParaPessoaList(mensagem);
+
+        menuPessoas = "----Pessoas Existentes----\n";
+        menuPessoas += "Quantidades de pessoas: "+listaPessoas.size()+"\n";
+        menuPessoas += "------------------------------------\n";
+
+        for (int i = 0; i < listaPessoas.size(); i++) {
+            Pessoa pessoa = listaPessoas.get(i);
+
+            menuPessoas += "CPF: " + pessoa.getCpf() + "\n";
+            menuPessoas += "Nome: " + pessoa.getNome() + "\n";
+            menuPessoas += "Endereço: " + pessoa.getEndereco() + "\n";
+            menuPessoas += "------------------------------------\n";
+        }
+
+        return menuPessoas;
+    }
+     
+    
+     
 }
